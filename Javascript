@@ -1,0 +1,75 @@
+spreadsheetId = 'https://docs.google.com/spreadsheets/d/1HDEkJni-P_tiOWwGT5On-0DBx3uHihVLKbQKlDpNy94/edit#gid=0;
+
+apiKey = 'AIzaSyBwPtqyOaQCGxv6VwZaoNqfzJKbNsZdZwk;
+
+ 
+
+function sendPointsToSheet($name, $points) {
+
+url = 'https://sheets.googleapis.com/v4/spreadsheets/' + spreadsheetId + '/values/Sheet1!A1:A1:append?;
+
+ 
+
+   request = new Request(url, {
+
+    method: 'POST',
+
+    headers: new Headers({
+
+      'Authorization': 'Bearer ' + apiKey,
+
+      'Content-Type': 'application/json'
+
+    }),
+
+    body: JSON.stringify({
+
+      values: $name, $points
+
+    })
+
+  });
+
+ 
+
+ 
+
+  fetch(request)
+
+    .then(function(response) {
+
+      if (response.status === 200) {
+
+        console.log('Points sent to Google Sheet');
+
+      } else {
+
+        console.log('Error sending points to Google Sheet');
+
+      }
+
+    })
+
+    .catch(function(error) {
+
+      console.log('Error sending points to Google Sheet:', error);
+
+    });
+
+}
+
+ 
+
+(set: $name to "$name")
+
+(set: $points to "$points")
+
+ 
+
+javascript:sendPointsToSheet($name, $points);
+
+ 
+
+(alert: "Data sent to Google Sheet!")
+
+ 
